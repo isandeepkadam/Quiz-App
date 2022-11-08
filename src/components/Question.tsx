@@ -4,7 +4,6 @@ import { Box, Grid, Typography, Paper, Button } from '@mui/material';
 import './question.css';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router';
-import { isGeneratorFunction } from 'util/types';
 
 const StyledButton = styled(Button)({
   width: '15%',
@@ -49,6 +48,8 @@ const Question: React.FunctionComponent<{
       return 'select';
     }
   };
+
+  console.log(error);
 
   const handleCheck = (option: string) => {
     setSelected(option);
