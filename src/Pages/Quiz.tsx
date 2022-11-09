@@ -44,10 +44,16 @@ const Quiz: React.FunctionComponent<{
           width: '100vw',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-evenly',
+          justifyContent: 'space-around',
+          p: 1,
         }}
       >
-        <Typography>
+        <Typography
+          sx={{
+            fontSize: { xs: '10px', sm: '20px', md: '20px' },
+            width: { xs: '20px', md: 'max-content' },
+          }}
+        >
           {questions.length > 0 && questions[currentQuestion].category}
         </Typography>
         <Typography
@@ -59,12 +65,16 @@ const Quiz: React.FunctionComponent<{
             background: '#151515',
             boxShadow: '3px 5px #FFC727',
             border: '1px solid gray',
+            fontSize: { xs: '12px', sm: '20px', md: '30px' },
           }}
         >
           Welcome, {name}
         </Typography>
-        <Typography> Score: {score}</Typography>
+        <Typography sx={{ fontSize: { xs: '12px', sm: '20px', md: '30px' } }}>
+          Score: {score}
+        </Typography>
       </Box>
+
       {questions.length > 0 ? (
         <Box sx={{ height: '70vh', width: '90vw' }}>
           <Question

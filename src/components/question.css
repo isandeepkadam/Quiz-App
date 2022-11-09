@@ -12,19 +12,24 @@
   background-color: #ffc727;
 }
 
-.singleOption::disable:hover {
-  background-color: transparent;
+.singleOption:disabled {
+  pointer-events: none;
 }
+
 @media (max-width: 614px) {
   .singleOption {
     width: 95%;
+    height: 70%;
   }
 }
 
-.controls {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
+@media (max-width: 450px) {
+  .singleOption {
+    height: 80%;
+  }
+  .singleOption:disabled {
+    pointer-events: none;
+  }
 }
 
 .select {

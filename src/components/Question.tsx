@@ -107,9 +107,8 @@ const Question: React.FunctionComponent<{
                 <Typography
                   sx={{
                     color: 'black',
-                    fontSize: 20,
+                    fontSize: { xs: 15, md: 20 },
                     textTransform: 'capitalize',
-                    p: 1,
                   }}
                 >
                   {option}
@@ -120,7 +119,7 @@ const Question: React.FunctionComponent<{
       </Grid>
       <Box
         sx={{
-          mt: 10,
+          mt: { xs: 1, md: 10, sm: 3 },
           height: 100,
           display: 'flex',
           justifyContent: 'space-between',
