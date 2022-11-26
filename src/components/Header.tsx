@@ -4,27 +4,25 @@ const Header = () => {
   return (
     <Paper
       className="header"
-      style={{
+      sx={{
         background: '#151515',
         margin: 0,
-        padding: 10,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: '0px 0px 10px 10px',
+        borderRadius: '0px 0px 15px 15px',
+        boxShadow: '1px 1px 10px #666',
       }}
-      elevation={7}
+      elevation={8}
     >
       <Typography
         variant="h2"
-        style={{
+        sx={{
           fontWeight: 700,
           fontSize: '8vh',
           textTransform: 'uppercase',
           WebkitTextStrokeWidth: '.5px',
           WebkitTextStrokeColor: '#FFC727',
-        }}
-        sx={{
           backgroundImage: `linear-gradient(to right, #009fff, #ec2f4b)`,
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',

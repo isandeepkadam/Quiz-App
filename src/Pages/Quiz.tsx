@@ -24,10 +24,10 @@ const Quiz: React.FunctionComponent<{
     );
   }, [questions, currentQuestion]);
 
-  console.log(options);
   const handleShuffle = (arrayOptions: string[]) => {
     return arrayOptions.sort(() => Math.random() - 0.5);
   };
+
   return (
     <Paper
       sx={{
@@ -85,6 +85,7 @@ const Quiz: React.FunctionComponent<{
             correct={questions[currentQuestion]?.correct_answer}
             score={score}
             setScore={setScore}
+            setQuestions={setQuestions}
           />
         </Box>
       ) : (

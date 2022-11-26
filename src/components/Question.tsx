@@ -1,21 +1,29 @@
 import { questionsInterface } from '../Data/Categories';
 import { useState } from 'react';
-import { Box, Grid, Typography, Paper, Button } from '@mui/material';
+import {
+  Box,
+  Grid,
+  Typography,
+  Paper,
+  Button,
+  Snackbar,
+  Alert,
+} from '@mui/material';
 import './question.css';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router';
 
-const StyledButton = styled(Button)({
-  width: '15%',
-  cursor: 'pointer',
-  color: 'black',
-  background: '#FFC727',
-  height: '60px',
-  fontSize: 16,
-  '&:hover': {
-    backgroundColor: '#FFC727',
-  },
-});
+// const StyledButton = styled(Button)({
+//   maxWidth: '15%',
+//   cursor: 'pointer',
+//   color: 'black',
+//   background: '#FFC727',
+//   height: '60px',
+//   fontSize: 16,
+//   ':hover': {
+//     background: '#FFC727',
+//   },
+// });
 
 const Question: React.FunctionComponent<{
   cuurentQuestion: number;
@@ -25,6 +33,7 @@ const Question: React.FunctionComponent<{
   correct: string;
   score: number;
   setScore: React.Dispatch<React.SetStateAction<number>>;
+  setQuestions: React.Dispatch<React.SetStateAction<questionsInterface[]>>;
 }> = ({
   cuurentQuestion,
   setCurrentQuestion,
@@ -33,6 +42,7 @@ const Question: React.FunctionComponent<{
   correct,
   score,
   setScore,
+  setQuestions,
 }) => {
   const [selected, setSelected] = useState<string>('');
   const [error, setError] = useState(false);
@@ -49,15 +59,17 @@ const Question: React.FunctionComponent<{
     }
   };
 
-  console.log(error);
-
   const handleCheck = (option: string) => {
     setSelected(option);
     if (option === correct) setScore(score + 1);
     setError(false);
   };
 
-  const handleQuit = () => {};
+  const handleQuit = () => {
+    setScore(0);
+    setQuestions([]);
+    navigate('/');
+  };
 
   const handleNext = () => {
     if (cuurentQuestion > 8) {
@@ -66,12 +78,37 @@ const Question: React.FunctionComponent<{
       setCurrentQuestion(cuurentQuestion + 1);
       setSelected('');
     } else {
-      alert('please select option first');
+      setError(true);
     }
   };
 
   return (
-    <Paper sx={{ height: '100%', background: '#202020' }}>
+    <Paper
+      sx={{
+        height: 'max-content',
+        background: '#202020',
+        paddingBottom: '30px',
+      }}
+    >
+      <Snackbar
+        open={error}
+        sx={{ margin: '200px auto', width: { xs: '300px', md: '350px' } }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        onClose={() => setError(false)}
+      >
+        <Alert
+          severity="error"
+          onClose={() => setError(false)}
+          sx={{
+            border: '1px solid #D2122E',
+            background: '#D2122E',
+            width: '100%',
+            justifyContent: 'center',
+          }}
+        >
+          Please Select one answer
+        </Alert>
+      </Snackbar>
       <Typography
         variant="h3"
         sx={{
@@ -95,8 +132,8 @@ const Question: React.FunctionComponent<{
 
       <Grid container sx={{ background: 'transparent' }}>
         {options &&
-          options.map((option) => (
-            <Grid item xs={12} lg={6} md={6} sm={6}>
+          options.map((option, index) => (
+            <Grid item xs={12} lg={6} md={6} sm={6} key={index}>
               <button
                 onClick={() => {
                   handleCheck(option);
@@ -110,6 +147,7 @@ const Question: React.FunctionComponent<{
                     fontSize: { xs: 15, md: 20 },
                     textTransform: 'capitalize',
                   }}
+                  variant="h2"
                 >
                   {option}
                 </Typography>
@@ -119,23 +157,32 @@ const Question: React.FunctionComponent<{
       </Grid>
       <Box
         sx={{
-          mt: { xs: 1, md: 10, sm: 3 },
+          mt: { md: 7, sm: 3 },
           height: 100,
           display: 'flex',
           justifyContent: 'space-between',
           padding: 5,
         }}
       >
-        <StyledButton onClick={handleQuit}>Quit</StyledButton>
+        <Button
+          onClick={handleQuit}
+          variant="contained"
+          sx={{
+            width: { xs: '100px', md: '15%' },
+            height: '60px',
+            cursor: 'pointer',
+          }}
+        >
+          Quit
+        </Button>
 
         <Button
           onClick={handleNext}
           variant="contained"
           sx={{
-            width: '15%',
+            width: { xs: '100px', md: '15%' },
             height: '60px',
             cursor: 'pointer',
-            color: '#fff',
           }}
         >
           Next Question

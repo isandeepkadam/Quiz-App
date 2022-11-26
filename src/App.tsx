@@ -12,8 +12,6 @@ const App = () => {
   const [questions, setQuestions] = useState<questionsInterface[]>([]);
   const [score, setScore] = useState(0);
 
-  console.log(questions);
-
   const fetchQuestions = async (category: string, difficulty: string) => {
     const { data } = await axios.get(
       `https://opentdb.com/api.php?amount=10${
@@ -25,7 +23,12 @@ const App = () => {
 
   return (
     <Router>
-      <Paper style={{ minHeight: '100vh', background: '#000' }}>
+      <Paper
+        sx={{
+          height: { xs: '120vh', md: '100vh' },
+          background: '#000',
+        }}
+      >
         <Header />
         <Routes>
           <Route
@@ -52,7 +55,7 @@ const App = () => {
           ></Route>
           <Route
             path="/result"
-            element={<Result score={score} name={name} />}
+            element={<Result score={score} name={name} setScore={setScore} />}
           ></Route>
         </Routes>
         <Footer />

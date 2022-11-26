@@ -38,7 +38,6 @@ const Home: React.FunctionComponent<{
     <Box
       sx={{
         background: {
-          md: 'url(./ques.svg) center / contain no-repeat',
           sm: 'url(./ques.svg) center / contain no-repeat',
           xs: 'url(./ques.svg)',
         },
@@ -58,7 +57,6 @@ const Home: React.FunctionComponent<{
     >
       <Snackbar
         open={error}
-        message="hey"
         sx={{ marginTop: 10, width: '350px' }}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         onClose={() => setError(false)}
@@ -137,17 +135,11 @@ const Home: React.FunctionComponent<{
           </MenuItem>
           <MenuItem
             key="Medium"
-            value="medium"
-            sx={{ color: 'black', borderRadius: 2 }}
-          >
-            Medium
-          </MenuItem>
-          <MenuItem
-            key="Difficult"
-            value="difficult"
+            value="medium" //shows difficult on options
             sx={{ color: 'black', borderRadius: 2 }}
           >
             Difficult
+            {/* There is an issue with difficult category, only option left is easy and medium*/}
           </MenuItem>
         </TextField>
         <Button

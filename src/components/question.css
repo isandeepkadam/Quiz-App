@@ -16,6 +16,10 @@
   pointer-events: none;
 }
 
+.singleOption:active {
+  background: olive;
+}
+
 @media (max-width: 614px) {
   .singleOption {
     width: 95%;
